@@ -1,0 +1,53 @@
+.header {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  position: fixed !important;
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: background-color 0.5s ease-out;
+  padding: 1.5rem;
+}
+.header:hover {
+  background-color: white;
+  transition: background-color 0.5s ease;
+}
+.header h4 {
+  color: black;
+}
+.btn-sample {
+  color: #ffffff;
+  background-color: #36c996;
+  border-color: #44cf9e;
+}
+.header_text {
+  color: black;
+  margin-right: 1rem;
+  font-size: 1.1rem;
+}
+.header_text:hover,
+.header_text:active {
+  color: #44cf9e;
+  border-bottom: 2px solid #44cf9e;
+}
+.active {
+  color: #44cf9e;
+  padding-bottom: 0.25rem;
+  border-bottom: 4px solid #44cf9e;
+}
+.navbar-toggler {
+  border: 2px solid #44cf9e;
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(68, 207, 158, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+.navbar-toggler:focus,
+.navbar-toggler-icon:focus {
+  outline: none;
+  box-shadow: none;
+}
+.header_logo {
+  margin-left: 20px;
+}
+.header__title {
+  margin-top: 6px;
+}

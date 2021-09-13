@@ -1,0 +1,12 @@
+.loginContent {
+  padding-top: 100px;
+}
+
+@media screen and (max-width: 700px) {
+  .loginContent {
+    padding-top: 200px;
+  }
+  .homepage__title {
+    text-align: center;
+  }
+}

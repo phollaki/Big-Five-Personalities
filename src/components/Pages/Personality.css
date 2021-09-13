@@ -1,0 +1,62 @@
+.jumbotron-background {
+  background-repeat: no-repeat;
+  justify-content: center;
+  display: flex;
+  height: 400px;
+  align-items: center;
+}
+.img-op {
+  background-image: url("../../images/openness.jpeg");
+  background-position: 0px -700px;
+}
+.img-ag {
+  background-image: url("../../images/agreeableness.jpeg");
+  background-position: 0px -550px;
+}
+.img-ex {
+  background-image: url("../../images/extroversion.jpeg");
+  background-position: -100px -350px;
+}
+.img-co {
+  background-image: url("../../images/conscientiousness.jpeg");
+  background-position: -100px -700px;
+}
+.img-ne {
+  background-image: url("../../images/neuroticism.jpeg");
+  background-position: 0px -600px;
+}
+@media (max-width: 500px) {
+  .img-op {
+    background-position: -400px -600px;
+  }
+  .img-ag {
+    background-position: -550px -550px;
+  }
+  .img-ex {
+    background-position: -650px -350px;
+  }
+  .img-co {
+    background-position: -800px -700px;
+  }
+  .img-ne {
+    background-position: -100px -700px;
+  }
+  .jumbotron > h1 {
+    font-size: 40px !important;
+  }
+}
+.jumbotron > h1 {
+  font-size: 70px;
+  color: white;
+}
+.personality__description {
+  font-size: 20px;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  text-align: justify;
+  padding: 2rem 0;
+}
+.personality__body {
+  margin: 0 3rem;
+}
