@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Big Five Application</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<link href="/resultpage.css" rel="stylesheet" />
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light fixed-top bg-light ">
+    <div class="container-fluid"  >
+      <a class="navbar-brand" href="/"><img src="/images/studentLogo.png" alt="" width="30" height="30"> The Big 5 Traits</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/test">Test</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/compare" tabindex="-1" >Compare</a>
+          </li>
+         </ul>
+       </div>
+       <div align="center" class="nav justify-content-center" sec:authorize="isAuthenticated()">
+	    <p style="margin:auto 10px;">Username: <b><a th:text="${#authentication.getName()}"></a></b>!</p>
+	    </div>
+	  <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+	      <button class="btn btn-sample my-2 my-sm-0" type="submit">Logout</button>
+	  </form>
+     </div>
+</nav>
+
+<div class="how-section1">
+
+<div class="row" th:if="${result.personality == 'Openness'}" >
+    <div class="col-md-6 how-img">
+        <img src="images/openness.png" class="img-fluid" alt="" style="width:500px; float:left;"/>
+    </div>
+    <div class="col-md-6">
+    	<div class="oppeness">
+        <h4 th:text="${result.personality}"></h4>   
+        <p>Openness to experience, or simply openness, is a basic personality trait denoting receptivity to new ideas and new experiences. It is one of the five core personality dimensions that drive behavior—known as the five-factor model of personality, or the Big 5. People with high levels of openness are more likely to seek out a variety of experiences, be comfortable with the unfamiliar, and pay attention to their inner feelings more than those who are less open to novelty. They tend to exhibit high levels of curiosity and often enjoy being surprised. People with low levels of openness prefer familiar routines, people, and ideas; they can be perceived as closed-minded.</p>
+			<h5>What Does It Mean to Be Neurotic?</h5>
+			Being open to experience is associated with creativity, curiosity, and a hunger for knowledge and learning. People high in this trait are also divergent and abstract thinkers, they are able to come up with multiple novel solutions to a difficult problem.
+		<h5>What is an example of openness?</h5>
+		<p>People high in openness are willing to try new things, like an exotic dish or travel to a strange land. They are inquisitive and seek out knowledge. People who are more open may be less practical and less analytical; instead, they rely on their inventiveness and are more receptive to change.</p>
+	</div>
+	</div>
+	<div class="col-md-12">
+	<div class="oppeness">
+	<h4 class="text-center">Jobs that are recommended for you</h4>
+	<div class=container>
+	<div class="row" style="margin-top:30px;">
+	    <div class="col-sm">
+	    	<p class="text-center">Artist</p>
+	      	<img class="img-thumbnail" src="images/artist.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	    <div class="col-sm">
+	    	<p class="text-center">Entrepreneur</p>
+	      	<img class="img-thumbnail" src="images/entrepreneur.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	    <div class="col-sm">
+	      	<p class="text-center">Pilot</p>
+	      	<img class="img-thumbnail" src="images/pilot.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	</div>
+	</div>
+	<div class="text-center">
+	<a href="https://en.wikipedia.org/wiki/Big_Five_personality_traits#Openness_to_experience" class="btn btn-sample" style="margin-top:20px">Read more about it</a></div>
+	</div>
+	</div>
+</div>
+
+
+<div class="row" th:if="${result.personality == 'Extraversion'}" >
+    <div class="col-md-6 how-img">
+        <img src="images/extrovert.png" class="img-fluid" alt="" style="width:500px; float:left;"/>
+    </div>
+    <div class="col-md-6">
+    	<div class="extrovert">
+        <h4 th:text="${result.personality}"></h4>   
+        <p>An extrovert is a person with qualities of a personality type known as extroversion, which means that they get their energy from being around other people. Someone who is extroverted may appear as very talkative and may be popular among peers (Carrigan, 1960).
+Extroverts may wish to seek out as much social interaction as possible because this is how they feel more energized. According to estimates, extroverts outnumber introverts by about three to one (Cain, 2012).
+Remember that extroversion isn't an all-or-nothing trait; it's actually a continuum and some people might be very extroverted while others are less so.</p>
+	<h5>Signs You Might Be an Extrovert</h5>
+		<ul>
+		<li>Enjoying social settings</li>
+		<li>Seek attention</li>
+		<li>Energized by being with others</li>
+		<li>Are friends with many people</li>
+		<li>Sociable</li>
+		<li>Enjoy group work</li>
+		<li>Prefer talking over writing</li>
+		<li>Outgoing</li>
+		</ul>
+		</div>
+		</div>
+	<div class="col-md-12">
+		<p>In terms of extroversion and introversion, this theory would not categorize people are being one or the other. It would say that everyone is on a scale of extroversion and people can be low on extroversion or high on extroversion.
+According to the Big Five model, there are facets, or behaviors associated with high and low levels of extroversion (McCrae & Costa, 1985).
+People who are highly extroverted tend to be more sociable, are outgoing, enjoy being the center of attention, and are energized by social interaction. Those low on extroversion prefer spending time alone, are reserved, dislike attention, and are drained by too much social interaction.
+It was found that individual’s Big Five scores tended to stay stable over time with only some slight changes such as scores of extroversion increasing over time.
+Although developed in the United States, the Big Five model appears to describe personality well throughout a range of cultures, suggesting that this theory is universal and remains the most widely accepted personality theory today (McCrae, 2002).
+Likewise, throughout literature, synonymous traits have been found which supports these 5 core factors of personality.</p>
+		
+	<div class="extrovert">
+	<h4 class="text-center">Jobs that are recommended for you</h4>
+	<div class=container>
+	<div class="row" style="margin-top:30px;">
+	    <div class="col-sm">
+	    	<p class="text-center">Event Planning</p>
+	      	<img class="img-thumbnail" src="images/eventplanning.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	    <div class="col-sm">
+	    	<p class="text-center">Influencer</p>
+	      	<img class="img-thumbnail" src="images/influencer.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	    <div class="col-sm">
+	      	<p class="text-center">Sales</p>
+	      	<img class="img-thumbnail" src="images/sales.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	</div>
+	</div>
+	<div class="text-center">
+	<a href="https://en.wikipedia.org/wiki/Neuroticism" class="btn btn-sample" style="margin-top:20px">Read more about it</a>
+	</div>
+	</div>
+	</div>
+</div>
+
+
+<div class="row" th:if="${result.personality == 'Neuroticism'}" >
+    <div class="col-md-6 how-img">
+        <img src="images/neuroticism.png" class="img-fluid" alt="" style="width:500px; float:left;"/>
+    </div>
+    <div class="col-md-6">
+    	<div class="neuroticism">
+        <h4 th:text="${result.personality}"></h4>   
+        <p>Neuroticism, one of the Big 5 personality traits, is typically defined as a tendency toward anxiety, depression, self-doubt, and other negative feelings. All personality traits, including neuroticism, exist on a spectrum—some people are just much more neurotic than others. In the context of the Big 5, neuroticism is sometimes described as low emotional stability or negative emotionality.
+			Some self-deprecating comedians and complainers wear their neuroticism as a badge of honor, but in truth, people with neurotic dispositions are more prone to anxiety, mood disorders, and additional unfavorable social and emotional outcomes.</p>
+			<h5>What Does It Mean to Be Neurotic?</h5>
+			Neuroticism has been defined somewhat differently by different psychologists, but at its core, it reflects a general tendency toward negative emotions. The term derives from the historic concept of neurosis, which referred to a form of mental illness involving chronic distress.
+			A person’s level of neuroticism can be assessed by personality tests that ask individuals to rate the extent to which they:
+		<ul>
+		<li>worry about things</li>
+		<li>are easily disturbed</li>
+		<li>have frequent mood swings</li>
+		<li>get irritated easily</li>
+		<li>often feel blue</li>
+		</ul>
+		</div>
+		</div>
+	<div class="col-md-12">
+		<p>along with other, similar self-descriptions, with higher ratings indicating a higher level of neuroticism. Some systems of organizing the Big 5 traits—which include neuroticism—further divide the traits into multiple sub-traits. One scale, the most recent version of the Big 5 Inventory, separates neuroticism (relabeled as Negative Emotionality) into three facets that each reflect a tendency to feel certain ways:</p>
+		<ul>
+		<li>anxiety</li>
+		<li>depression</li>
+		<li>emotional volatility</li>
+		</ul>
+	<div class="neuroticism">
+	<h4 class="text-center">Jobs that are recommended for you</h4>
+	<div class=container>
+	<div class="row" style="margin-top:30px;">
+	    <div class="col-sm">
+	    	<p class="text-center">Accountant</p>
+	      	<img class="img-thumbnail" src="images/accountant.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	    <div class="col-sm">
+	    	<p class="text-center">Florist</p>
+	      	<img class="img-thumbnail" src="images/florist.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	    <div class="col-sm">
+	      	<p class="text-center">Yoga Instructor</p>
+	      	<img class="img-thumbnail" src="images/yoga_instructor.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	</div>
+	</div>
+	<div class="text-center">
+	<a href="https://en.wikipedia.org/wiki/Extraversion_and_introversion" class="btn btn-sample" style="margin-top:20px">Read more about it</a>
+	</div>
+	</div>
+	</div>
+</div>
+
+
+<div class="row" th:if="${result.personality == 'Agreeableness'}" >
+    <div class="col-md-6 how-img">
+        <img src="images/agreeableness.png" class="img-fluid" alt="" style="width:500px; float:left;"/>
+    </div>
+    <div class="col-md-6">
+    	<div class="agreeableness">
+        <h4 th:text="${result.personality}"></h4>   
+        <p>Agreeableness is a personality trait that can be described as cooperative, polite, kind, and friendly. People high in agreeableness are more trusting, affectionate, altruistic, and generally displaying more prosocial behaviors than others. People high in this prosocial trait are particularly empathetic, showing great concern for the welfare of others, they are the first to help those in need. Agreeableness is one of five dimensions of personality described as the Big Five. The other traits are openness to experience, conscientiousness, extraversion, and neuroticism.</p>
+		<h5>The Likeable and Agreeable Individual</h5>
+		<p>When a person is high in this personality trait, they are less me-centric and more we-centric. They look for the common good in others, are quick to hear out opinions of the people around them, and look for harmony instead of discord.</p>
+		<h5>How do I know if I am high in agreeableness?</h5>
+		<p>The agreeable don’t insult others, nor do they question a person’s motives or intentions. They also don’t think that they are better than others. Everyone is their equal, and they are quick to empathize and respect others.</p>
+		</div>
+		</div>
+	<div class="col-md-12">
+		<h5 style="margin-top:20px;">Can you become more agreeable?</h5>
+		<p>Research shows that this personality trait is somewhat adaptable as people age. People become more emotionally stable, more conscientious, and more agreeable in their later years. Also, the work environment demands team effort and partnership, this collaboration requires a degree of agreeableness. Plus, living through the hardship of life can make a person more agreeable.</p>
+	<div class="agreeableness">
+	<h4 class="text-center">Jobs that are recommended for you</h4>
+	<div class=container>
+	<div class="row" style="margin-top:30px;">
+	    <div class="col-sm">
+	    	<p class="text-center">Nurse</p>
+	      	<img class="img-thumbnail" src="images/nurse.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	    <div class="col-sm">
+	    	<p class="text-center">Counselor</p>
+	      	<img class="img-thumbnail" src="images/counselor.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	    <div class="col-sm">
+	      	<p class="text-center">Teacher</p>
+	      	<img class="img-thumbnail" src="images/teacher.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	</div>
+	</div>
+	<div class="text-center">
+	<a href="https://en.wikipedia.org/wiki/Agreeableness" class="btn btn-sample" style="margin-top:20px">Read more about it</a>
+	</div>
+	</div>
+	</div>
+</div>
+
+<div class="row" th:if="${result.personality == 'Conscientiousness'}" >
+    <div class="col-md-6 how-img">
+        <img src="images/conscientiousness.png" class="img-fluid" alt="" style="width:500px; float:left;"/>
+    </div>
+    <div class="col-md-6">
+    	<div class="conscientiousness">
+        <h4 th:text="${result.personality}"></h4>   
+        <p>Conscientiousness is a fundamental personality trait—one of the Big Five—that reflects the tendency to be responsible, organized, hard-working, goal-directed, and to adhere to norms and rules. Like the other core personality factors, it has multiple facets; conscientiousness comprises self-control, industriousness, responsibility, and reliability.
+
+A conscientious person is good at self-regulation and impulse control. This trait influences whether you will set and keep long-range goals, deliberate over choices, behave cautiously or impulsively, and take obligations to others seriously. (The other Big Five personality traits are extraversion, agreeableness, openness, and neuroticism.) Conscientiousness is generally a key ingredient for success—in love as well as work. It's also a major predictor of health, well-being, and longevity.</p>
+		<h5>Understanding Conscientiousness</h5>
+		<p>Conscientious people are proactive in making decisions big and small. For example, the conscientious don't just set goals, they set a timeline for meeting each goal. People with a conscientious personality do well in jobs that require attention to detail, such as surgeons and pilots; and it's no surprise that the conscientious are less likely to wind up behind bars.</p>
+		
+		</div>
+		</div>
+	<div class="col-md-12">
+		<h5 style="margin-top:20px;">How does a conscientious person act?</h5>
+		<p>These people are not impulsive. They are planners and they abide by schedules. They also do not miss bill payments, they take notes, keep their promises, and show up on time. They engage in self-care through exercise, proper sleep, and a healthy diet. They are less likely to engage in risky behaviors like smoking and heavy drinking.</p>
+		<h5 >How can you become more conscientious?</h5>
+		<p>One technique is mental contrasting, by which individuals imagine a goal, the path to the goal, and obstacles likely to be encountered along the way. Such a process can help people choose feasible goals and boost their commitment to achieving them. Both nature and nurture affect this personality trait, and people do become more conscientious as they age.</p>
+		<h5>The Link Between Conscientiousness and Success</h5>
+		<p>Conscientious individuals tend to be high achievers in academics and in professional life. On the job, along with high productivity, they garner higher earnings, good relationships, work satisfaction, and achievement. In addition, the conscientious tend to land more leadership positions.</p>
+	<div class="conscientiousness">
+	<h4 class="text-center">Jobs that are recommended for you</h4>
+	<div class=container>
+	<div class="row" style="margin-top:30px;">
+	    <div class="col-sm">
+	    	<p class="text-center">Doctor</p>
+	      	<img class="img-thumbnail" src="images/doctor.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	    <div class="col-sm">
+	    	<p class="text-center">Politician</p>
+	      	<img class="img-thumbnail" src="images/politician.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	    <div class="col-sm">
+	      	<p class="text-center">Freelancer writer</p>
+	      	<img class="img-thumbnail" src="images/writer.jpg" style="width:20rem; height: 20rem;" />
+	    </div>
+	</div>
+	</div>
+	<div class="text-center">
+	<a href="https://en.wikipedia.org/wiki/Conscientiousness" class="btn btn-sample" style="margin-top:20px">Read more about it</a>
+	</div>
+	</div>
+	</div>
+</div>
+</div>
+
+
+</body>
+</html>

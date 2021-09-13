@@ -1,0 +1,18 @@
+body{
+	margin: 65px 100px 0 100px;
+}
+
+.btn-sample { 
+  color: #ffffff; 
+  background-color: #36C996; 
+  border-color: #44CF9E; 
+} 
+
+@media (max-width: 1100px){
+	body{
+	margin: 130px 60px 0 60px;;
+	}
+  .image {
+    display:none;
+  }
+}

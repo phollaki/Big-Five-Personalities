@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Big Five Application</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<link href="/homepage.css" rel="stylesheet" />
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light fixed-top bg-light ">
+    <div class="container-fluid"  >
+      <a class="navbar-brand" href="/"><img src="/images/studentLogo.png" alt="" width="30" height="30"> The Big 5 Traits</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/test">Test</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/compare" tabindex="-1" >Compare</a>
+          </li>
+          <li class="nav-item" th:if="${result.personality != null}">
+            <a class="nav-link" href="/myresult" tabindex="-1" >My Result</a>
+          </li>
+         </ul>
+       </div>
+       <div align="center" class="nav justify-content-center" sec:authorize="isAuthenticated()">
+	    <p style="margin:auto 10px;">Welcome <b><a th:text="${#authentication.getName()}"></a></b>!</p>
+	    </div>
+	  <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+	      <button class="btn btn-sample my-2 my-sm-0" type="submit">Logout</button>
+	  </form>
+     </div>
+</nav>
+<main class="container">
+    <div class="bg-light p-5 rounded mt-3">
+      <h1>Big 5 traits personality test</h1>
+      <div class=container_home style="display: flex;">
+        <p class="text">Learn to know yourself better with a personality test.<br>The following test contains 20 questions which is estimated to take you about 5 minutes to complete.</p>
+        <img src="images/bigfive.png" class="image" style="flex-direction: row; justify-content:flex-end; width: 500px; margin-left: 100px; margin-top: -100px;" alt="...">
+      </div> 
+      <div class="container_button">
+        <a class="btn btn-sample my-2 my-sm-0" href="test" type="submit">Take the TEST</a>
+      </div>
+    </div>
+</main>
+  <br>
+  <br>
+  <div class="card-group">
+    <div class="card">
+      <img class="card-img-top" src="images/openness.png" style="height: 235.5px !important;" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Openness</h5>
+        <p class="card-text">
+          <p>This trait features characteristics such as imagination and insight. 1 People who are high in this trait also tend to have a broad range of interests. They are curious about the world and other people and eager to learn new things and enjoy new experiences.
+            People who are high in this trait tend to be more adventurous and creative. People low in this trait are often much more traditional and may struggle with abstract thinking.
+          </p>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="images/conscientiousness.png" style="height: 235.5px !important;" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Conscientiousness</h5>
+        <p class="card-text">Standard features of this dimension include high levels of thoughtfulness, good impulse control, and goal-directed behaviors. 1 Highly conscientious people tend to be organized and mindful of details. They plan ahead, think about how their behavior affects others, and are mindful of deadlines.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="images/extrovert.png" style="height: 235.5px !important;" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Extraversion</h5>
+        <p class="card-text">Extraversion (or extroversion) is characterized by excitability, sociability, talkativeness, assertiveness, and high amounts of emotional expressiveness.1 People who are high in extraversion are outgoing and tend to gain energy in social situations. Being around other people helps them feel energized and excited.
+          People who are low in extraversion (or introverted) tend to be more reserved and have less energy to expend in social settings. Social events can feel draining and introverts often require a period of solitude and quiet in order to "recharge."
+          </p>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="images/neuroticism.png" style="height: 235.5px !important;" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Neuroticism</h5>
+        <p class="card-text">Neuroticism is a trait characterized by sadness, moodiness, and emotional instability. Individuals who are high in this trait tend to experience mood swings, anxiety, irritability, and sadness. Those low in this trait tend to be more stable and emotionally resilient.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="images/agreeableness.png" style="height: 235.5px !important;" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Agreeableness</h5>
+        <p class="card-text">This personality dimension includes attributes such as trust, altruism, kindness, affection, and other prosocial behaviors.1 People who are high in agreeableness tend to be more cooperative while those low in this trait tend to be more competitive and sometimes even manipulative.</p>
+      </div>
+    </div>
+  </div>
+<br>
+<br>
+<br>
+<hr class="featurette-divider">
+
+<footer class="blog-footer" style="text-align: center;">
+    <p>
+      <a href="#">Back to top</a>
+    </p>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>

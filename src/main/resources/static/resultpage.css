@@ -1,0 +1,66 @@
+body {
+  margin-top:65px;
+}
+
+.btn-sample { 
+  color: #ffffff; 
+  background-color: #36C996; 
+  border-color: #44CF9E; 
+} 
+.how-section1{
+    margin-top:-15%;
+    padding: 10%;
+    max-width:1550px;
+}
+.how-section1 .oppeness h4{
+    color: #0080c0;
+    font-weight: bold;
+    font-size: 30px;
+}
+.how-section1 .neuroticism h4{
+    color: #ff8000;
+    font-weight: bold;
+    font-size: 30px;
+}
+.how-section1 .agreeableness h4{
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 30px;
+}
+.how-section1 .conscientiousness h4{
+    color: #008080;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+.how-section1 .extrovert h4{
+    color: #008040;
+    font-weight: bold;
+    font-size: 30px;
+}
+.how-section1 .subheading{
+    color: #3931af;
+    font-size: 20px;
+}
+.how-section1 .row
+{
+    margin-top: 10%;
+}
+.how-img 
+{
+    text-align: center;
+}
+.how-img img{
+    width: 40%;
+}
+@media (max-width: 1300px){
+	.imgjob{
+	}
+}
+@media (max-width: 800px){
+	body{
+		margin: 150px 20px 0 20px;
+		}
+}
+

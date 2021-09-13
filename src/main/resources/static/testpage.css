@@ -1,0 +1,25 @@
+input[type="radio"]{
+  margin: 0 0 0 40px;
+}
+body {
+  margin: 65px 20px 0 20px;
+}
+
+.btn-sample { 
+  color: #ffffff; 
+  background-color: #36C996; 
+  border-color: #44CF9E; 
+} 
+@media (max-width: 900px){
+		input[type="radio"]{
+		  margin: 0 0 0 0;
+		}
+		body{
+		margin: 65px 20px 0 20px;
+		}
+	}
+@media (max-width: 800px){
+	body{
+		margin: 150px 20px 0 20px;
+		}
+}
