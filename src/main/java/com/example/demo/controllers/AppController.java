@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.PersonalityHelper;
 import com.example.demo.entities.ERole;
 import com.example.demo.entities.Role;
 import com.example.demo.entities.Student_Dim;
@@ -91,9 +92,12 @@ public class AppController {
 		return personality;
 	}
 	@PostMapping("/personality")
-	public String getPersonality(@RequestBody String id) {
+	public PersonalityHelper getPersonality(@RequestBody String id) {
 		String[] splitId = id.split("=");
-		return studentService.getPersonality(Long.parseLong(splitId[0]));
+		Double [] student = resultService.getStudentResult(splitId[0]);
+		String personality = studentService.getPersonality(Long.parseLong(splitId[0]));
+		PersonalityHelper ph = new PersonalityHelper(personality,student[0],student[1],student[2],student[3],student[4],"");
+		return ph;
 	}
 	@RequestMapping("/compare")  
 	private List<Double[]> getCompareData(@RequestBody Map<String,String> list){
@@ -135,15 +139,14 @@ public class AppController {
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
-
+		System.out.println(userDetails.getUsername());
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
-												 userDetails.getEmail(),
 												 userDetails.getPersonality(),
 												 roles));
 	}
-
+	/*
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getStu_id())) {
@@ -193,5 +196,5 @@ public class AppController {
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-	}
+	}*/
 }

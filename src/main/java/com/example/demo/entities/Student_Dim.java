@@ -3,7 +3,6 @@ package com.example.demo.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +14,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -44,12 +42,7 @@ public class Student_Dim {
 	private String fac_code;
 	
 	@Column(nullable = false)
-	private String loc_code;
-	
-	@NotBlank
-	@Size(max = 50)
-	@Email
-	private String email;
+	private Long loc_code;
 	
 	@NotBlank
 	@Size(max = 120)
@@ -57,21 +50,16 @@ public class Student_Dim {
 	private String password;
 	
 	@Column
-	private String marriage_status;
-	@Column
-	private String address;
-	
-	@Column
 	private String personality;
 	
 	@Column
-	private String gender;
+	private Long gender;
 	
-	public String getGender() {
+	public Long getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(Long gender) {
 		this.gender = gender;
 	}
 
@@ -87,7 +75,7 @@ public class Student_Dim {
 	}
 	
 	public Student_Dim(String username, String stu_fname, String stu_lname, String dep_code, String fac_code,
-			String loc_code, @NotBlank @Size(max = 120) String password, String gender) {
+			Long loc_code, @NotBlank @Size(max = 120) String password, Long gender) {
 		super();
 		this.username = username;
 		this.stu_fname = stu_fname;
@@ -99,26 +87,10 @@ public class Student_Dim {
 		this.gender = gender;
 	}
 
-	public Student_Dim(String stu_id, String stu_fname, String stu_lname, String dep_code, String fac_code,
-			String loc_code, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password,
-			String marriage_status, String address, String gender) {
-		super();
-		this.username = stu_id;
-		this.stu_fname = stu_fname;
-		this.stu_lname = stu_lname;
-		this.dep_code = dep_code;
-		this.fac_code = fac_code;
-		this.loc_code = loc_code;
-		this.email = email;
-		this.password = password;
-		this.marriage_status = marriage_status;
-		this.address = address;
-		this.gender = gender;
-	}
 
 	public Student_Dim(Long id, String stu_id, String stu_fname, String stu_lname, String dep_code, String fac_code,
-			String loc_code, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password,
-			String marriage_status, String address,  String personality, String gender,
+			Long loc_code, @NotBlank @Size(max = 120) String password,
+			  String personality, Long gender,
 			Set<Role> roles) {
 		super();
 		this.id = id;
@@ -128,10 +100,7 @@ public class Student_Dim {
 		this.dep_code = dep_code;
 		this.fac_code = fac_code;
 		this.loc_code = loc_code;
-		this.email = email;
 		this.password = password;
-		this.marriage_status = marriage_status;
-		this.address = address;
 		this.personality = personality;
 		this.gender = gender;
 		this.roles = roles;
@@ -185,21 +154,14 @@ public class Student_Dim {
 		this.fac_code = fac_code;
 	}
 
-	public String getLoc_code() {
+	public Long getLoc_code() {
 		return loc_code;
 	}
 
-	public void setLoc_code(String loc_code) {
+	public void setLoc_code(Long loc_code) {
 		this.loc_code = loc_code;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String getPassword() {
 		return password;
@@ -209,21 +171,6 @@ public class Student_Dim {
 		this.password = password;
 	}
 
-	public String getMarriage_status() {
-		return marriage_status;
-	}
-
-	public void setMarriage_status(String marriage_status) {
-		this.marriage_status = marriage_status;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
 
 
 	public String getPersonality() {

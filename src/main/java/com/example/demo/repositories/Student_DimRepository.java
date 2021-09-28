@@ -14,5 +14,4 @@ public interface Student_DimRepository extends JpaRepository<Student_Dim, Long> 
 
 	Boolean existsByUsername(String stu_id);
 
-	Boolean existsByEmail(String email);
 }

@@ -18,8 +18,6 @@ public class UserDetailsImpl implements UserDetails {
 	private Long id;
 
 	private String stu_id;
-
-	private String email;
 	
 	private String personality;
 
@@ -29,12 +27,11 @@ public class UserDetailsImpl implements UserDetails {
 	private Collection<? extends GrantedAuthority> authorities;
 
 
-	public UserDetailsImpl(Long id, String stu_id, String email,  String password,String personality,
+	public UserDetailsImpl(Long id, String stu_id,  String password,String personality,
 			Collection<? extends GrantedAuthority> authorities) {
 		super();
 		this.id = id;
 		this.stu_id = stu_id;
-		this.email = email;
 		this.password = password;
 		this.personality = personality;
 		this.authorities = authorities;
@@ -50,7 +47,6 @@ public class UserDetailsImpl implements UserDetails {
 		return new UserDetailsImpl(
 				user.getId(), 
 				user.getStu_id(), 
-				user.getEmail(),
 				user.getPassword(), 
 				user.getPersonality(),
 				authorities);
@@ -67,9 +63,6 @@ public class UserDetailsImpl implements UserDetails {
 		return id;
 	}
 
-	public String getEmail() {
-		return email;
-	}
 	public String getPersonality() {
 		return personality;
 	}
