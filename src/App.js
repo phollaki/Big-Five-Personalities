@@ -9,6 +9,11 @@ import Personality from "./components/Pages/Personality";
 import Compare from "./components/Pages/Compare";
 import "./App.css";
 import Calculation from "./components/Pages/Calculation";
+import Agreeableness from "./components/Pages/Agreeableness";
+import Openness from "./components/Pages/Openness";
+import Conscientiousness from "./components/Pages/Conscientiousness";
+import Neuroticism from "./components/Pages/Neuroticism";
+import Extroversion from "./components/Pages/Extroversion.js";
 const App = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
 
@@ -18,6 +23,21 @@ const App = () => {
         <Fragment>
           <Header />
           <Switch>
+            <Route path="/extroversion">
+              <Extroversion />
+            </Route>
+            <Route path="/openness">
+              <Openness />
+            </Route>
+            <Route path="/conscientiousness">
+              <Conscientiousness />
+            </Route>
+            <Route path="/neuroticism">
+              <Neuroticism />
+            </Route>
+            <Route path="/agreeableness">
+              <Agreeableness />
+            </Route>
             <Route path="/test">
               <Test />
             </Route>

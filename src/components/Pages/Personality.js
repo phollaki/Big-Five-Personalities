@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import studentService from "../../services/student-service";
 import personalities from "../../helpers/personalities.json";
@@ -20,6 +20,10 @@ import neuroticism1 from "../../images/neuroticism1.jpeg";
 import neuroticism2 from "../../images/neuroticism2.jpeg";
 import neuroticism3 from "../../images/neuroticism3.jpeg";
 import "./Personality.css";
+import CanvasJSReact from "../../canvas/canvasjs.react";
+import { buildCanvasPersonality } from "../../canvas/canvasBuild";
+const CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
 const OP = "Openness";
 const EX = "Extroversion";
 const NE = "Neuroticism";
@@ -29,16 +33,45 @@ const AG = "Agreeableness";
 const Profile = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
   const [personality, setPersonality] = useState(currentUser.personality);
+  const [traitValues, setTraitValues] = useState({});
+  const [secondStrongest, setsecondStrongest] = useState("");
+
   useEffect(() => {
     const getPersonality = async function () {
       const res = await studentService.getPersonality(currentUser.id);
       currentUser.personality = res;
-      setPersonality(res);
+      setTraitValues({
+        Openness: res.op,
+        Agreeableness: res.ag,
+        Extroversion: res.ex,
+        Neuroticism: res.ne,
+        Conscientiousness: res.co,
+      });
+      setPersonality(res.personality);
+      setsecondStrongest(res.secondPersonality);
       localStorage.setItem("user", JSON.stringify(currentUser));
     };
     getPersonality();
   }, [currentUser]);
-  console.log(personality);
+
+  const options = buildCanvasPersonality(Object.values(traitValues));
+  const generateLink = function () {
+    return (
+      <Fragment>
+        <div className="link-personality__description">
+          <p>
+            {`Your second strongest personality is `}
+            <Link to={`/${secondStrongest.toLowerCase()}`}>
+              <b>{`${secondStrongest}`}</b>
+            </Link>
+            , if you want to read about this personality trait click the link.
+          </p>
+        </div>
+        <div className="d-inline-flex p-2 personality__description"></div>
+      </Fragment>
+    );
+  };
+
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
@@ -87,6 +120,13 @@ const Profile = () => {
               />
             </div>
           </div>
+          <div className="compare__chart">
+            <CanvasJSChart
+              options={options}
+              /* onRef = {ref => this.chart = ref} */
+            />
+          </div>
+          {generateLink()}
         </div>
       </Fragment>
     );
@@ -138,6 +178,13 @@ const Profile = () => {
           <section className="personality__description">
             {personalities.agreeableness.descr3}
           </section>
+          <div className="compare__chart">
+            <CanvasJSChart
+              options={options}
+              /* onRef = {ref => this.chart = ref} */
+            />
+          </div>
+          {generateLink()}
         </div>
       </Fragment>
     );
@@ -189,6 +236,13 @@ const Profile = () => {
           <section className="personality__description">
             {personalities.extroversion.descr3}
           </section>
+          <div className="compare__chart">
+            <CanvasJSChart
+              options={options}
+              /* onRef = {ref => this.chart = ref} */
+            />
+          </div>
+          {generateLink()}
         </div>
       </Fragment>
     );
@@ -240,6 +294,13 @@ const Profile = () => {
           <section className="personality__description">
             {personalities.conscientiousness.descr3}
           </section>
+          <div className="compare__chart">
+            <CanvasJSChart
+              options={options}
+              /* onRef = {ref => this.chart = ref} */
+            />
+          </div>
+          {generateLink()}
         </div>
       </Fragment>
     );
@@ -291,17 +352,19 @@ const Profile = () => {
           <section className="personality__description">
             {personalities.neuroticism.descr3}
           </section>
+          <div className="compare__chart">
+            <CanvasJSChart
+              options={options}
+              /* onRef = {ref => this.chart = ref} */
+            />
+          </div>
+          {generateLink()}
         </div>
       </Fragment>
     );
   }
 
-  return (
-    <div>
-      <h1>Something went wrong!</h1>
-      <p>There is no personality like yours. You are special!</p>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Profile;

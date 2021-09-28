@@ -60,3 +60,11 @@
 .personality__body {
   margin: 0 3rem;
 }
+.link-personality__description {
+  font-size: 20px;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
