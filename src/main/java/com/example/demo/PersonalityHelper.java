@@ -86,11 +86,9 @@ public class PersonalityHelper {
 		String secondPersonality =  personalities[0];
 		double[] values = {this.ag,this.co,this.ex,this.ne,this.op};
 		for (int i = 1; i < values.length; i++) {
-			System.out.println(max + " " + values[1]);
 			if(max < values[i] && !personalities[i].equals(this.personality.toLowerCase())) {
 				max = values[i];
 				secondPersonality = personalities[i];
-				System.out.println(max + " " + secondPersonality);
 			}
 		}
 		

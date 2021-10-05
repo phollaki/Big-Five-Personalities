@@ -1,32 +1,27 @@
 package com.example.demo.services;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entities.Results;
-import com.example.demo.entities.Student_Dim;
 import com.example.demo.exceptions.StudentNotFoundException;
 import com.example.demo.repositories.ResultsRepository;
 
 @Service
 public class ResultService {
-	
 	@Autowired
 	private ResultsRepository resultRepository;
 	
-	public void saveOrUpdate(Map<String, String> list){
+	public Optional<Results> getStudentResultData(Long id) {
+		return resultRepository.findById(id);
+	}
+	
+	public int[] saveOrUpdate(Map<String, String> list){
 		long stuid = Long.parseLong(list.get("0"));
-		
 		Results result = new Results();
 		result.setStudent_id(stuid);
 		
@@ -54,13 +49,12 @@ public class ResultService {
 		}
 		resultRepository.save(result);
 		
+		return result.getAllAnswers();
 	}
 
 	public void insertPersonality(String stuid) {
-		
 		resultRepository.what_is_my_personality(stuid);
 	}
-
 	public Double[] getStudentResult(String stu_id) {
 		Results student = resultRepository.findById(Long.parseLong(stu_id)).orElseThrow(()->new StudentNotFoundException("Student id is not found"));
 		Double [] results = new Double [5];

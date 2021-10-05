@@ -1,17 +1,31 @@
 package com.example.demo.controllers;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.fluent.Form;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +44,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.PersonalityHelper;
 import com.example.demo.entities.ERole;
+import com.example.demo.entities.Location_Dim;
+import com.example.demo.entities.Results;
 import com.example.demo.entities.Role;
 import com.example.demo.entities.Student_Dim;
 import com.example.demo.payload.request.LoginRequest;
@@ -41,6 +57,7 @@ import com.example.demo.repositories.Student_DimRepository;
 import com.example.demo.security.jwt.JwtUtils;
 import com.example.demo.security.services.UserDetailsImpl;
 import com.example.demo.services.AnswerService;
+import com.example.demo.services.LocationService;
 import com.example.demo.services.QuestionService;
 import com.example.demo.services.ResultService;
 import com.example.demo.services.StudentService;
@@ -76,6 +93,9 @@ public class AppController {
 	@Autowired
 	private StudentService studentService;
 	
+	@Autowired
+	private LocationService locationService;
+	
 	@GetMapping("/test")
 	public HashMap<String, List<?>> viewTestPage() {
 		HashMap<String,List<?>> answersAndQuestions = new HashMap<String,List<?>>();
@@ -83,14 +103,97 @@ public class AppController {
 		answersAndQuestions.put("questions", questionService.getAllQuestion());
 		return answersAndQuestions;
 	}
+	
 	@PostMapping("/result")
-	public String getTestResult(@RequestBody Map<String,String> list) {
-		resultService.saveOrUpdate(list);
+	public String getTestResult(@RequestBody Map<String,String> list) throws ClientProtocolException, IOException {
+		int[] answers = resultService.saveOrUpdate(list);
 		String stuid = list.get("0");
-	    resultService.insertPersonality(stuid);
+		resultService.insertPersonality(stuid);
 	    String personality = studentService.getPersonality(Long.parseLong(stuid));
-		return personality;
+	    System.out.println("My calculation"+personality);
+		Optional<Student_Dim> student = studentService.getStudentInformation(Long.parseLong(stuid));
+		Optional<Location_Dim> location = locationService.getLocation(student.get().getLoc_code());
+		try {
+		HttpResponse response = Request.Post("http://127.0.0.1:5000/personality").bodyForm(
+			      Form.form().add("answ0",Integer.toString(answers[0]))
+			      .add("answ1",Integer.toString(answers[1]))
+			      .add("answ2",Integer.toString(answers[2]))
+			      .add("answ3",Integer.toString(answers[3]))
+			      .add("answ4",Integer.toString(answers[4]))
+			      .add("answ5",Integer.toString(answers[5]))
+			      .add("answ6",Integer.toString(answers[6]))
+			      .add("answ7",Integer.toString(answers[7]))
+			      .add("answ8",Integer.toString(answers[8]))
+			      .add("answ9",Integer.toString(answers[9]))
+			      .add("answ10",Integer.toString(answers[10]))
+			      .add("answ11",Integer.toString(answers[11]))
+			      .add("answ12",Integer.toString(answers[12]))
+			      .add("answ13",Integer.toString(answers[13]))
+			      .add("answ14",Integer.toString(answers[14]))
+			      .add("answ15",Integer.toString(answers[15]))
+			      .add("answ16",Integer.toString(answers[16]))
+			      .add("answ17",Integer.toString(answers[17]))
+			      .add("answ18",Integer.toString(answers[18]))
+			      .add("answ19",Integer.toString(answers[19]))
+			      .add("age",Integer.toString(student.get().getAge()))
+			      .add("gender",Integer.toString(student.get().getGender()))
+			      .add("density",Integer.toString(location.get().getDensity()))
+			      .add("avg_temp",Integer.toString((int) location.get().getAverage_temp()))
+			      .add("invi_score",Integer.toString(location.get().getInvidualism_score()))
+			      .add("gp_avg",Integer.toString((int)student.get().getGp_avg()))
+			      .build())
+			      .execute().returnResponse();
+		String responseString = new BasicResponseHandler().handleResponse(response);
+		studentService.insertPersonality(Long.parseLong(stuid),responseString);
+		}catch(Exception ex) {
+			System.out.println(ex);
+		}
+	    String personality2 = studentService.getPersonality(Long.parseLong(stuid));
+	    System.out.println("Python ML calculation"+personality2);
+
+		return personality2;
 	}
+	
+	@PostMapping("/guest")
+	public String getGuestTestResult(@RequestBody Map<String,String> list) throws ClientProtocolException, IOException  {
+		String gender = "1";
+		if(list.get("gender").equals("Female")) {
+			gender = "2";
+		}
+		HttpResponse response = Request.Post("http://127.0.0.1:5000/personality").bodyForm(
+			      Form.form()
+			      .add("answ0",list.get("opn1"))
+			      .add("answ1",list.get("opn2"))
+			      .add("answ2",list.get("opn3"))
+			      .add("answ3",list.get("opn4"))
+			      .add("answ4",list.get("agg1"))
+			      .add("answ5",list.get("agg2"))
+			      .add("answ6",list.get("agg3"))
+			      .add("answ7",list.get("agg4"))
+			      .add("answ8",list.get("neu1"))
+			      .add("answ9",list.get("neu2"))
+			      .add("answ10",list.get("neu3"))
+			      .add("answ11",list.get("neu4"))
+			      .add("answ12",list.get("ext1"))
+			      .add("answ13",list.get("ext2"))
+			      .add("answ14",list.get("ext3"))
+			      .add("answ15",list.get("ext4"))
+			      .add("answ16",list.get("csn1"))
+			      .add("answ17",list.get("csn2"))
+			      .add("answ18",list.get("csn3"))
+			      .add("answ19",list.get("csn4"))
+			      .add("age",list.get("age"))
+			      .add("gender",gender)
+			      .add("density","3")
+			      .add("avg_temp","9")
+			      .add("invi_score","80")
+			      .add("gp_avg","0")
+			      .build())
+			      .execute().returnResponse();
+		String responseString = new BasicResponseHandler().handleResponse(response);
+		return responseString;
+	}
+	
 	@PostMapping("/personality")
 	public PersonalityHelper getPersonality(@RequestBody String id) {
 		String[] splitId = id.split("=");
@@ -98,6 +201,19 @@ public class AppController {
 		String personality = studentService.getPersonality(Long.parseLong(splitId[0]));
 		PersonalityHelper ph = new PersonalityHelper(personality,student[0],student[1],student[2],student[3],student[4],"");
 		return ph;
+	}
+	@PostMapping("/calculations")
+	public HashMap<String, Object> getCalculationData(@RequestBody String id) {
+		HashMap<String,Object> data = new HashMap<String,Object>();
+		String[] splitId = id.split("=");
+		Optional<Results> studentResult = resultService.getStudentResultData(Long.parseLong(splitId[0]));
+		Optional<Student_Dim> student = studentService.getStudentInformation(Long.parseLong(splitId[0]));
+		Optional<Location_Dim> location = locationService.getLocation(student.get().getLoc_code());
+		data.put("location",location);
+		data.put("questions", questionService.getAllQuestion());
+		data.put("results", studentResult);
+		data.put("student", student);
+		return data;
 	}
 	@RequestMapping("/compare")  
 	private List<Double[]> getCompareData(@RequestBody Map<String,String> list){
@@ -113,19 +229,6 @@ public class AppController {
 		data.add(student2);
 		return data;
 	} 
-	/*
-	 * @PostMapping("/result") private ModelAndView saveOrUpdate(HttpServletRequest
-	 * request) { List<String> list = new ArrayList<String>(); List<String> list2 =
-	 * new ArrayList<String>(); Map<String, String[]> requestParameterMap =
-	 * request.getParameterMap(); for(String key : requestParameterMap.keySet()){
-	 * list.add(requestParameterMap.get(key)[0]); list2.add(key); }
-	 * resultService.saveOrUpdate(list, list2); resultService.insertPersonality();
-	 * Student_Dim result = studentService.findStudentById();
-	 * System.out.println(result.getPersonality()); return new
-	 * ModelAndView("resultpage", "result", result); }
-	 */
-	
-
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -139,7 +242,6 @@ public class AppController {
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
-		System.out.println(userDetails.getUsername());
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 

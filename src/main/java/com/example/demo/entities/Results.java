@@ -374,5 +374,35 @@ public class Results{
 				+ extraversion_score + ", aggreeableness_score=" + aggreeableness_score + "]";
 	}
 	
-
+	public int[] getAllAnswers() {
+		int[] answers = {this.getOpn1(),
+		                        this.getOpn2(),
+		                        this.getOpn3(),
+		                        this.getOpn4(),
+		                        this.getAgg1(),
+		                        this.getAgg2(),
+		                        this.getAgg3(),
+		                        this.getAgg4(),
+		                        this.getNeu1(),
+		                        this.getNeu2(),
+		                        this.getNeu3(),
+		                        this.getNeu4(),
+		                        this.getExt1(),
+		                        this.getExt2(),
+		                        this.getExt3(),
+		                        this.getExt4(),
+		                        this.getCsn1(),
+		                        this.getCsn2(),
+		                        this.getCsn3(),
+		                        this.getCsn4()};
+		return answers;
+	}
+	public int[] getAllAnswersInOrder() {
+		int[] answers = {
+				this.getOpn1(),this.getCsn1(),this.getExt1(),this.getAgg1(), this.getNeu1(),               
+				this.getOpn2(),this.getCsn2(),this.getExt2(),this.getAgg2(),this.getNeu2(),
+				this.getOpn3(),this.getCsn3(),this.getExt3(),this.getAgg3(),this.getNeu3(),
+		        this.getOpn4(),this.getCsn4(),this.getExt4(),this.getAgg4(),this.getNeu4()};
+		return answers;
+	}
 }

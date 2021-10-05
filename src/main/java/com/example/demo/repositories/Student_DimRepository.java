@@ -11,7 +11,5 @@ import com.example.demo.entities.Student_Dim;
 @Repository
 public interface Student_DimRepository extends JpaRepository<Student_Dim, Long> {
 	Optional<Student_Dim> findByUsername(String stu_id);
-
 	Boolean existsByUsername(String stu_id);
-
 }

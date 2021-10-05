@@ -29,39 +29,39 @@ public class Student_Dim {
 	@Column(name="stu_id", unique = true)
 	private String username;
 	
-	@Column(nullable = false)
+	@Column(name="dep_code",nullable = false)
+	private String dep_code;
+	
+	@Column(name="fac_code",nullable = false)
+	private String fac_code;
+	
+	@Column(name="loc_code",nullable = false)
+	private Long loc_code;
+	
+	@NotBlank
+	@Size(max = 120)
+	@Column(name="password",nullable = false)
+	private String password;
+	
+	@Column(name="stu_fname",nullable = false)
 	private String stu_fname;
 	
 	@Column(nullable = false)
 	private String stu_lname;
 	
-	@Column(nullable = false)
-	private String dep_code;
+	@Column(name="gender")
+	private int gender;
 	
-	@Column(nullable = false)
-	private String fac_code;
+	@Column(name="age")
+	private int age;
 	
-	@Column(nullable = false)
-	private Long loc_code;
+	@Column(name="gp_avg")
+	private double gp_avg;
 	
-	@NotBlank
-	@Size(max = 120)
-	@Column(nullable = false)
-	private String password;
-	
-	@Column
+	@Column(name="personality")
 	private String personality;
 	
-	@Column
-	private Long gender;
 	
-	public Long getGender() {
-		return gender;
-	}
-
-	public void setGender(Long gender) {
-		this.gender = gender;
-	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -75,7 +75,7 @@ public class Student_Dim {
 	}
 	
 	public Student_Dim(String username, String stu_fname, String stu_lname, String dep_code, String fac_code,
-			Long loc_code, @NotBlank @Size(max = 120) String password, Long gender) {
+			Long loc_code, @NotBlank @Size(max = 120) String password, int gender) {
 		super();
 		this.username = username;
 		this.stu_fname = stu_fname;
@@ -90,7 +90,7 @@ public class Student_Dim {
 
 	public Student_Dim(Long id, String stu_id, String stu_fname, String stu_lname, String dep_code, String fac_code,
 			Long loc_code, @NotBlank @Size(max = 120) String password,
-			  String personality, Long gender,
+			  String personality, int gender,
 			Set<Role> roles) {
 		super();
 		this.id = id;
@@ -106,6 +106,30 @@ public class Student_Dim {
 		this.roles = roles;
 	}
 
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public double getGp_avg() {
+		return gp_avg;
+	}
+
+	public void setGp_avg(double gp_avg) {
+		this.gp_avg = gp_avg;
+	}
+
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+	
 	public Long getId() {
 		return id;
 	}
