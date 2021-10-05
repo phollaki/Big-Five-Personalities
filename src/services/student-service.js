@@ -18,12 +18,22 @@ class StudentService {
       return response.data;
     });
   };
+  sendGuestTest = (result) => {
+    return axios.post(API_URL + "guest", result).then((response) => {
+      return response.data;
+    });
+  };
   getCompareData = (id, stuid) => {
     return axios
       .post(API_URL + "compare", { id: id, stuid: stuid })
       .then((response) => {
         return response.data;
       });
+  };
+  getCalculationData = (id) => {
+    return axios.post(API_URL + "calculations", id).then((response) => {
+      return response.data;
+    });
   };
 }
 

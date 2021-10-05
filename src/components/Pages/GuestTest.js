@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import StudentService from "../../services/student-service";
 import { Spinner } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
@@ -8,11 +7,11 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 function Test() {
   const history = useHistory();
-  const { user: currentUser } = useSelector((state) => state.auth);
+  //const { user: currentUser } = useSelector((state) => state.auth);
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [data, setData] = useState(false);
-  const [result, setResult] = useState([currentUser.id.toString()]);
+  const [result, setResult] = useState({ gender: "Male", age: "15" });
   const [index] = useState(0);
   const [checked, setIsChecked] = useState(false);
   const [modal, setModal] = useState(false);
@@ -32,16 +31,26 @@ function Test() {
   };
   const testFormHandler = (e) => {
     e.preventDefault();
-
-    StudentService.sendTest(result)
+    StudentService.sendGuestTest(result)
       .then((response) => {
-        history.push("/personality");
+        console.log(response);
+        history.push({
+          pathname: "/guest-personality",
+          state: { personality: response },
+        });
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
+  const ageEventHandler = (e) => {
+    setResult({ ...result, age: e.target.value });
+  };
+  const genderEventHandler = (e) => {
+    setResult({ ...result, gender: e.target.value });
+  };
   const handleAnswerAdd = (questionKey, answer) => {
+    console.log(result);
     setResult({
       ...result,
       [questionKey]: answer,
@@ -53,8 +62,39 @@ function Test() {
   if (data) {
     return (
       <form className="test__form" onSubmit={testFormHandler}>
+        <div>
+          <p className="text-center">
+            For the best result, please fill in all personal information and
+            answer all test questions honestly.
+          </p>
+        </div>
+        <div className="infoContainer ">
+          <div className="form-row">
+            <div className="form-group col-md-6 mt-2 mb-4">
+              <label htmlFor="inputEmail4">Age</label>
+              <input
+                type="number"
+                className="form-control"
+                id="age"
+                placeholder="Age"
+                required
+                onChange={ageEventHandler}
+              />
+            </div>
+            <div className="form-group col-md-6">
+              <label htmlFor="inputPassword4">Gender</label>
+              <select
+                required
+                className="form-control form-control"
+                onChange={genderEventHandler}
+              >
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+          </div>
+        </div>
         <h1 className="test_title">I am someone who...</h1>
-
         {questions.map((question) => (
           <div className="container container2" key={question.qst_id}>
             <p className="question_title">{question.qst_title}</p>

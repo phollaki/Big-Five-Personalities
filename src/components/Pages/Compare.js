@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import CanvasJSReact from "../../canvas/canvasjs.react";
 import buildCanvas from "../../canvas/canvasBuild";
 //var CanvasJSReact = require('./canvasjs.react');
-const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function Compare() {
@@ -58,10 +57,7 @@ function Compare() {
       </form>
       {compareData.length > 0 && (
         <div className="compare__chart">
-          <CanvasJSChart
-            options={options}
-            /* onRef = {ref => this.chart = ref} */
-          />
+          <CanvasJSChart options={options} />
         </div>
       )}
       {compareData.length < 1 && searched && (

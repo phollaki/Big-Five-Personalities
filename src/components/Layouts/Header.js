@@ -9,8 +9,8 @@ function Header() {
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
   const toggleNavbar = () => setCollapsed(!collapsed);
-  const { user: currentUser } = useSelector((state) => state.auth);
-  console.log(currentUser.personality);
+  const { user: currentUser } = useSelector((state) => state?.auth);
+
   const logOut = useCallback(() => {
     dispatch(logout());
   }, [dispatch]);
@@ -81,6 +81,25 @@ function Header() {
             >
               Logout
             </button>
+          </>
+        )}
+        {!currentUser && (
+          <>
+            <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+            <Collapse isOpen={collapsed} navbar>
+              <Nav>
+                <NavItem>
+                  <NavLink href="/guest-test" className="header_text">
+                    Test
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/login" className="header_text">
+                    Login
+                  </NavLink>
+                </NavItem>
+              </Nav>
+            </Collapse>
           </>
         )}
       </div>

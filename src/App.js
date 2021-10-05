@@ -14,6 +14,8 @@ import Openness from "./components/Pages/Openness";
 import Conscientiousness from "./components/Pages/Conscientiousness";
 import Neuroticism from "./components/Pages/Neuroticism";
 import Extroversion from "./components/Pages/Extroversion.js";
+import GuestTest from "./components/Pages/GuestTest";
+import GuestPersonality from "./components/Pages/GuestPersonality";
 const App = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
 
@@ -58,11 +60,24 @@ const App = () => {
         </Fragment>
       )}
       {!currentUser && (
-        <Switch>
-          <Route path="">
-            <Login />
-          </Route>
-        </Switch>
+        <Fragment>
+          <Header />
+          <Switch>
+            <Route path="/guest-personality">
+              <GuestPersonality />
+            </Route>
+            <Route path="/guest-test">
+              <GuestTest />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="*">
+              <Redirect to="/" />
+              <HomePage />
+            </Route>
+          </Switch>
+        </Fragment>
       )}
     </div>
   );

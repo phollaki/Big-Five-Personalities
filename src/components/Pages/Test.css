@@ -30,3 +30,7 @@
 .modal_close {
   border: none;
 }
+.infoContainer {
+  display: flex;
+  justify-content: center;
+}

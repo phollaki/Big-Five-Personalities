@@ -38,8 +38,8 @@ const buildCanvas = function (userData, compare) {
       {
         type: "column",
         name: "Others data",
-        showInLegend: true,
-        yValueFormatString: "#,##0.# Units",
+        includeZero: true,
+        yValueFormatString: "#,### Points",
         color: "#000000",
         dataPoints: [
           { label: "Openness", y: userData[0] },
@@ -52,9 +52,7 @@ const buildCanvas = function (userData, compare) {
       {
         type: "column",
         name: "Your data",
-        axisYType: "secondary",
-        showInLegend: true,
-        yValueFormatString: "#,##0.#",
+        yValueFormatString: "#,### Points",
         color: "#36c996",
         dataPoints: [
           { label: "Openness", y: compare[0] },

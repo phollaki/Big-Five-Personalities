@@ -1,7 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
-import studentService from "../../services/student-service";
+import { useLocation } from "react-router-dom";
 import personalities from "../../helpers/personalities.json";
 import openness3 from "../../images/openness3.jpeg";
 import openness4 from "../../images/openness4.jpeg";
@@ -20,9 +18,6 @@ import neuroticism1 from "../../images/neuroticism1.jpeg";
 import neuroticism2 from "../../images/neuroticism2.jpeg";
 import neuroticism3 from "../../images/neuroticism3.jpeg";
 import "./Personality.css";
-import CanvasJSReact from "../../canvas/canvasjs.react";
-import { buildCanvasPersonality } from "../../canvas/canvasBuild";
-const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const OP = "Openness";
 const EX = "Extroversion";
@@ -30,51 +25,12 @@ const NE = "Neuroticism";
 const CO = "Conscientiousness";
 const AG = "Agreeableness";
 
-const Profile = () => {
-  const { user: currentUser } = useSelector((state) => state.auth);
-  const [personality, setPersonality] = useState(currentUser.personality);
-  const [traitValues, setTraitValues] = useState({});
-  const [secondStrongest, setsecondStrongest] = useState("");
-
+const Profile = (props) => {
+  const [personality, setPersonality] = useState("");
+  const location = useLocation();
   useEffect(() => {
-    const getPersonality = async function () {
-      const res = await studentService.getPersonality(currentUser.id);
-      currentUser.personality = res;
-      setTraitValues({
-        Openness: res.op,
-        Agreeableness: res.ag,
-        Extroversion: res.ex,
-        Neuroticism: res.ne,
-        Conscientiousness: res.co,
-      });
-      setPersonality(res.personality);
-      setsecondStrongest(res.secondPersonality);
-      localStorage.setItem("user", JSON.stringify(currentUser));
-    };
-    getPersonality();
-  }, [currentUser]);
-
-  const options = buildCanvasPersonality(Object.values(traitValues));
-  const generateLink = function () {
-    return (
-      <Fragment>
-        <div className="link-personality__description">
-          <p>
-            {`Your second strongest personality is `}
-            <Link to={`/${secondStrongest.toLowerCase()}`}>
-              <b>{`${secondStrongest}`}</b>
-            </Link>
-            , if you want to read about this personality trait click the link.
-          </p>
-        </div>
-        <div className="d-inline-flex p-2 personality__description"></div>
-      </Fragment>
-    );
-  };
-
-  if (!currentUser) {
-    return <Redirect to="/login" />;
-  }
+    setPersonality(location.state.personality);
+  }, [location]);
   if (personality === OP) {
     return (
       <Fragment>
@@ -84,7 +40,7 @@ const Profile = () => {
 
         <div className="personality__body">
           <section className="personality__description">
-            {personalities.openness?.descr}
+            {personalities.openness.descr}
           </section>
 
           <div className="row">
@@ -97,12 +53,12 @@ const Profile = () => {
             </div>
             <div className="col-sm-6">
               <p className="personality__description">
-                {personalities.openness?.descr1}
+                {personalities.openness.descr}
               </p>
             </div>
           </div>
           <section className="personality__description">
-            {personalities.openness?.descr2}
+            {personalities.openness.descr}
           </section>
           <div className="row">
             <div className="col-sm-6">
@@ -120,10 +76,6 @@ const Profile = () => {
               />
             </div>
           </div>
-          <div className="compare__chart">
-            <CanvasJSChart options={options} />
-          </div>
-          {generateLink()}
         </div>
       </Fragment>
     );
@@ -136,7 +88,7 @@ const Profile = () => {
         </header>
         <div className="personality__body">
           <section className="personality__description">
-            {personalities.agreeableness?.descr}
+            {personalities.agreeableness.descr}
           </section>
 
           <div className="row">
@@ -149,12 +101,12 @@ const Profile = () => {
             </div>
             <div className="col-sm-6">
               <p className="personality__description">
-                {personalities.agreeableness?.descr1}
+                {personalities.agreeableness.descr1}
               </p>
             </div>
           </div>
           <section className="personality__description">
-            {personalities.agreeableness?.descr2}
+            {personalities.agreeableness.descr2}
           </section>
           <div className="row">
             <div className="col-sm-6">
@@ -173,12 +125,8 @@ const Profile = () => {
             </div>
           </div>
           <section className="personality__description">
-            {personalities.agreeableness?.descr3}
+            {personalities.agreeableness.descr3}
           </section>
-          <div className="compare__chart">
-            <CanvasJSChart options={options} />
-          </div>
-          {generateLink()}
         </div>
       </Fragment>
     );
@@ -191,7 +139,7 @@ const Profile = () => {
         </header>
         <div className="personality__body">
           <section className="personality__description">
-            {personalities.extroversion?.descr}
+            {personalities.extroversion.descr}
           </section>
 
           <div className="row">
@@ -204,12 +152,12 @@ const Profile = () => {
             </div>
             <div className="col-sm-6">
               <p className="personality__description">
-                {personalities.extroversion?.descr1}
+                {personalities.extroversion.descr2}
               </p>
             </div>
           </div>
           <section className="personality__description">
-            {personalities.extroversion.descr2}
+            {personalities.extroversion.descr1}
           </section>
           <div className="row">
             <div className="col-sm-6">
@@ -230,10 +178,6 @@ const Profile = () => {
           <section className="personality__description">
             {personalities.extroversion.descr3}
           </section>
-          <div className="compare__chart">
-            <CanvasJSChart options={options} />
-          </div>
-          {generateLink()}
         </div>
       </Fragment>
     );
@@ -246,7 +190,7 @@ const Profile = () => {
         </header>
         <div className="personality__body">
           <section className="personality__description">
-            {personalities.conscientiousness?.descr}
+            {personalities.conscientiousness.descr}
           </section>
 
           <div className="row">
@@ -259,12 +203,12 @@ const Profile = () => {
             </div>
             <div className="col-sm-6">
               <p className="personality__description">
-                {personalities.conscientiousness?.descr1}
+                {personalities.conscientiousness.descr2}
               </p>
             </div>
           </div>
           <section className="personality__description">
-            {personalities.conscientiousness?.descr2}
+            {personalities.conscientiousness.descr1}
           </section>
           <div className="row">
             <div className="col-sm-6">
@@ -283,12 +227,8 @@ const Profile = () => {
             </div>
           </div>
           <section className="personality__description">
-            {personalities.conscientiousness?.descr3}
+            {personalities.conscientiousness.descr3}
           </section>
-          <div className="compare__chart">
-            <CanvasJSChart options={options} />
-          </div>
-          {generateLink()}
         </div>
       </Fragment>
     );
@@ -301,7 +241,7 @@ const Profile = () => {
         </header>
         <div className="personality__body">
           <section className="personality__description">
-            {personalities.neuroticism?.descr}
+            {personalities.neuroticism.descr}
           </section>
 
           <div className="row">
@@ -314,12 +254,12 @@ const Profile = () => {
             </div>
             <div className="col-sm-6">
               <p className="personality__description">
-                {personalities.neuroticism?.descr1}
+                {personalities.neuroticism.descr1}
               </p>
             </div>
           </div>
           <section className="personality__description">
-            {personalities.neuroticism?.descr2}
+            {personalities.neuroticism.descr2}
           </section>
           <div className="row">
             <div className="col-sm-6">
@@ -338,12 +278,8 @@ const Profile = () => {
             </div>
           </div>
           <section className="personality__description">
-            {personalities.neuroticism?.descr3}
+            {personalities.neuroticism.descr3}
           </section>
-          <div className="compare__chart">
-            <CanvasJSChart options={options} />
-          </div>
-          {generateLink()}
         </div>
       </Fragment>
     );
@@ -351,5 +287,4 @@ const Profile = () => {
 
   return <div></div>;
 };
-
 export default Profile;
