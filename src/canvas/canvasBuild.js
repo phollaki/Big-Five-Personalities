@@ -38,7 +38,6 @@ const buildCanvas = function (userData, compare) {
       {
         type: "column",
         name: "Others data",
-        includeZero: true,
         yValueFormatString: "#,### Points",
         color: "#000000",
         dataPoints: [

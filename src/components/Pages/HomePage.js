@@ -6,8 +6,11 @@ import extrovert from "../../images/extrovert.png";
 import aggreeablenes from "../../images/agreeableness.png";
 import neuroticism from "../../images/neuroticism.png";
 import bigfive from "../../images/bigfive.png";
+import { useSelector } from "react-redux";
 
 function HomePage() {
+  const { user: currentUser } = useSelector((state) => state.auth);
+
   return (
     <Fragment>
       <main>
@@ -23,7 +26,7 @@ function HomePage() {
                 you about 5 minutes to complete.
               </p>
               <div className="container_button">
-                <a className="btn btn-sample" href="test" type="submit">
+                <a className="btn btn-sample" href={currentUser?"test":"guest-test"} type="submit">
                   Take the TEST
                 </a>
               </div>
