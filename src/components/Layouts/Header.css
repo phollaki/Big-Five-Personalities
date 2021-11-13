@@ -1,11 +1,11 @@
 .header {
   display: flex;
   align-items: center;
-  margin: 0;
   position: fixed !important;
   background-color: rgba(255, 255, 255, 0.6);
   transition: background-color 0.5s ease-out;
   padding: 1.5rem;
+  height: 6rem;
 }
 .header:hover {
   background-color: white;
@@ -18,23 +18,40 @@
   color: #ffffff;
   background-color: #36c996;
   border-color: #44cf9e;
+  width: 10rem;
+  font-size: 20px;
+  font-weight: 500;
+  transition: all 0.2s ease-out;
+}
+.btn-sample:hover {
+  color: black;
+  transform: translateY(-3px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+.btn-sample:active {
+  transform: translateY(-1px);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 }
 .header_text {
   color: black;
   margin-right: 1rem;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  line-height: 40px;
+  transition: all 0.4s ease-out;
+  margin-left: 2rem;
 }
 .header_text:hover,
 .header_text:active {
+  padding-bottom: 0px;
   color: #44cf9e;
-  border-bottom: 2px solid #44cf9e;
+  border-bottom: 4px solid #44cf9e;
 }
 .active {
   color: #44cf9e;
-  padding-bottom: 0.25rem;
   border-bottom: 4px solid #44cf9e;
 }
 .navbar-toggler {
+  transition: all 0.5s ease-out;
   border: 2px solid #44cf9e;
 }
 .navbar-toggler-icon {
@@ -50,4 +67,26 @@
 }
 .header__title {
   margin-top: 6px;
+}
+.logout__icon {
+  font-size: 25px !important;
+}
+.header__logout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease-out;
+  font-size: 14px;
+  padding-right: 2rem;
+}
+
+.header__logout:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 700px) {
+  .header {
+    height: 10rem;
+  }
 }

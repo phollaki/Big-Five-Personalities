@@ -19,13 +19,15 @@ function Calculation() {
     getPersonality();
   }, [currentUser]);
   return (
-    <div className="container">
-      <h2 className="text-center">
-        How your <span className="highlight">{userInfo.personality}</span>
-        <br />
-        personality has calculated
-      </h2>
-      <table className="table mt-5 table-striped text-center">
+    <div className="">
+      <div className="text-center">
+        <h2>
+          How your <span className="highlight">{userInfo.personality}</span>
+          <br />
+          personality has calculated
+        </h2>
+      </div>
+      <table className="table table-responsive mt-5 table-striped text-center">
         <thead>
           <tr>
             <th scope="col">Question</th>

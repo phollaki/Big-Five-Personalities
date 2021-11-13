@@ -5,6 +5,7 @@ import "./Header.css";
 import { Collapse, NavbarToggler, Nav, NavItem, NavLink } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/auth";
+import LogoutIcon from "@mui/icons-material/Logout";
 function Header() {
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
@@ -74,13 +75,10 @@ function Header() {
                 <span>!</span>
               </NavLink>
             </div>
-            <button
-              className="btn btn-sample my-2 my-sm-0"
-              type="submit"
-              onClick={logOut}
-            >
-              Logout
-            </button>
+            <div className="header__logout" type="submit" onClick={logOut}>
+              <LogoutIcon className="logout__icon" />
+              <span>Logout</span>
+            </div>
           </>
         )}
         {!currentUser && (

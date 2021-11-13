@@ -13,6 +13,7 @@
     rgb(255, 255, 255) 50%,
     rgb(86, 201, 161) 100%
   );
+  padding-bottom: 2rem;
 }
 .test_title {
   color: #000000;
@@ -33,4 +34,29 @@
 .infoContainer {
   display: flex;
   justify-content: center;
+}
+.guest__form {
+  padding: 2rem;
+}
+.guest__form-title {
+  display: flex;
+  align-items: center;
+}
+.warning__icon {
+  margin-left: 1rem;
+  font-size: 35px !important;
+  color: rgb(189, 76, 1);
+  margin-bottom: 5px;
+}
+.guest__test-form {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  width: 20rem;
+}
+.test__form-input {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+  height: 3rem;
+  font-size: 20px;
 }

@@ -17,7 +17,7 @@ function HomePage() {
         <div className="container">
           <div className="row">
             <div className="col-sm-6 homepage__title">
-              <h1>
+              <h1 className="title">
                 Big 5 <span className="highlight">personality</span> test
               </h1>
               <p>
@@ -26,7 +26,11 @@ function HomePage() {
                 you about 5 minutes to complete.
               </p>
               <div className="container_button">
-                <a className="btn btn-sample" href={currentUser?"test":"guest-test"} type="submit">
+                <a
+                  className="btn btn-sample "
+                  href={currentUser ? "test" : "guest-test"}
+                  type="submit"
+                >
                   Take the TEST
                 </a>
               </div>

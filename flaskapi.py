@@ -42,7 +42,7 @@ def get_personality():
   avg_temp = int(request.form.get('avg_temp'))
   individualism_score = int(request.form.get('invi_score'))
   gp_avg = int(request.form.get('gp_avg'))
-  dataset = pd.read_csv('Bigfive15000.csv')
+  dataset = pd.read_csv('./Bigfive15000.csv')
   X = dataset.iloc[:, :-1].values
   y = dataset.iloc[:, -1].values
   #le = LabelEncoder()

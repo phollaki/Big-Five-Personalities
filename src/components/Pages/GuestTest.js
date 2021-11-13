@@ -4,7 +4,7 @@ import { Spinner } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import "./Test.css";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 function Test() {
   const history = useHistory();
   //const { user: currentUser } = useSelector((state) => state.auth);
@@ -62,30 +62,36 @@ function Test() {
   if (data) {
     return (
       <form className="test__form" onSubmit={testFormHandler}>
-        <div>
-          <p className="text-center">
-            For the best result, please fill in all personal information and
-            answer all test questions honestly.
+        <div className="guest__form">
+          <div className="guest__form-title">
+            <h2 className="form__title">You are currently logged out!</h2>
+            <ReportProblemIcon className="warning__icon" />
+          </div>
+          <p className="guest__form-text">
+            Because you are not a logged in user, we can not own detailed
+            information for you. If you want to sign up please write an email
+            for admin. For the best result, please fill in all personal
+            information and answer all test questions honestly.
           </p>
         </div>
         <div className="infoContainer ">
           <div className="form-row">
-            <div className="form-group col-md-6 mt-2 mb-4">
-              <label htmlFor="inputEmail4">Age</label>
+            <div className="form-group col-md-6 guest__test-form">
+              <label htmlFor="age">Age</label>
               <input
                 type="number"
-                className="form-control"
+                className="form-control test__form-input"
                 id="age"
                 placeholder="Age"
                 required
                 onChange={ageEventHandler}
               />
             </div>
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-6 guest__test-form">
               <label htmlFor="inputPassword4">Gender</label>
               <select
                 required
-                className="form-control form-control"
+                className="form-control test__form-input"
                 onChange={genderEventHandler}
               >
                 <option>Male</option>

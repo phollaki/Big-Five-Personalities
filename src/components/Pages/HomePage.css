@@ -21,14 +21,7 @@
   transform: scale(1.07, 1.05) skewX(-15deg);
   background: var(--gradient-main);
 }
-@media (max-width: 700px) {
-  .homepage__img {
-    display: none !important;
-  }
-  .homepage__title {
-    width: 100%;
-  }
-}
+
 .homepage__body {
   padding: 0 2rem;
 }
@@ -38,10 +31,41 @@
 .card-text {
   text-align: justify;
 }
+.title {
+  letter-spacing: 10px;
+}
 .homepage__title {
   margin: auto;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 30px;
 }
-.img-responsive {
-  width: auto;
-  height: 300px;
+.card-img-top {
+  height: 15rem;
+}
+.container_button {
+  text-align: center;
+  margin-left: -3rem;
+}
+@media (min-width: 701px) and (max-width: 1200px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+  .card-img-top {
+    height: 12rem;
+  }
+  .card-title {
+    font-size: 15px;
+  }
+  .card-text {
+    font-size: 14px;
+    text-align: left;
+  }
+}
+
+@media (max-width: 700px) {
+  .homepage__img {
+    display: none !important;
+  }
+  .homepage__title {
+    width: 100%;
+  }
 }
