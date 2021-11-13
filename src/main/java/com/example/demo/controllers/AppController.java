@@ -5,27 +5,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,20 +29,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.PersonalityHelper;
-import com.example.demo.entities.ERole;
 import com.example.demo.entities.Location_Dim;
 import com.example.demo.entities.Results;
-import com.example.demo.entities.Role;
 import com.example.demo.entities.Student_Dim;
 import com.example.demo.payload.request.LoginRequest;
-import com.example.demo.payload.request.SignupRequest;
 import com.example.demo.payload.response.JwtResponse;
-import com.example.demo.payload.response.MessageResponse;
 import com.example.demo.repositories.RoleRepository;
 import com.example.demo.repositories.Student_DimRepository;
 import com.example.demo.security.jwt.JwtUtils;
@@ -110,7 +95,8 @@ public class AppController {
 		String stuid = list.get("0");
 		resultService.insertPersonality(stuid);
 	    String personality = studentService.getPersonality(Long.parseLong(stuid));
-	    System.out.println("My calculation"+personality);
+	    System.out.println("My calculation "+personality);
+	    
 		Optional<Student_Dim> student = studentService.getStudentInformation(Long.parseLong(stuid));
 		Optional<Location_Dim> location = locationService.getLocation(student.get().getLoc_code());
 		try {
@@ -149,7 +135,7 @@ public class AppController {
 			System.out.println(ex);
 		}
 	    String personality2 = studentService.getPersonality(Long.parseLong(stuid));
-	    System.out.println("Python ML calculation"+personality2);
+	    System.out.println("Python ML calculation "+personality2);
 
 		return personality2;
 	}
