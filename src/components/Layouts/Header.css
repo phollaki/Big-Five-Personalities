@@ -14,6 +14,14 @@
 .header h4 {
   color: black;
 }
+.header__logo {
+  width: 7rem;
+  height: auto;
+}
+.header__logo-text {
+  width: 14rem;
+  height: auto;
+}
 .btn-sample {
   color: #ffffff;
   background-color: #36c996;
@@ -39,10 +47,11 @@
   line-height: 40px;
   transition: all 0.4s ease-out;
   margin-left: 2rem;
+  border-bottom: 4px solid transparent;
+  backface-visibility: hidden;
 }
 .header_text:hover,
 .header_text:active {
-  padding-bottom: 0px;
   color: #44cf9e;
   border-bottom: 4px solid #44cf9e;
 }

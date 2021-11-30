@@ -1,6 +1,7 @@
 import React, { useState, useCallback, Fragment } from "react";
 import { Link } from "react-router-dom";
-import studentLogo from "../../images/studentLogo.png";
+import logo from "../../images/logo-green.png";
+import logoText from "../../images/logo-text.png";
 import "./Header.css";
 import { Collapse, NavbarToggler, Nav, NavItem, NavLink } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,15 +20,21 @@ function Header() {
   return (
     <header className="navbar navbar-expand-lg header fixed-top">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand d-flex header_logo">
+        <Link to="/" className="d-flex align-center">
           <img
-            src={studentLogo}
+            src={logo}
             alt="Student logo for student management system"
-            width="40px"
-            height="40px"
+            className="header__logo"
           />
-          <h4 className="header__title">The Big 5 Traits</h4>
         </Link>
+        <Link to="/" className="d-flex align-center">
+          <img
+            src={logoText}
+            alt="Student logo for student management system"
+            className="header__logo-text"
+          />
+        </Link>
+
         {currentUser && (
           <>
             <NavbarToggler onClick={toggleNavbar} className="mr-2" />
