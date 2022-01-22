@@ -47,6 +47,7 @@ const Profile = () => {
         Neuroticism: res.ne,
         Conscientiousness: res.co,
       });
+      console.log(res)
       setPersonality(res.personality);
       setsecondStrongest(res.secondPersonality);
       localStorage.setItem("user", JSON.stringify(currentUser));

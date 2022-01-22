@@ -18,7 +18,7 @@ function Header() {
   }, [dispatch]);
 
   return (
-    <header className="navbar navbar-expand-lg header fixed-top">
+    <header className="navbar navbar-expand-xl header fixed-top">
       <div className="container-fluid">
         <Link to="/" className="d-flex align-center">
           <img
